@@ -4,7 +4,7 @@
   <title><![CDATA[少林@NISRA]]></title>
   <link href="http://nisra-shaolin.github.com/atom.xml" rel="self"/>
   <link href="http://nisra-shaolin.github.com/"/>
-  <updated>2012-05-18T23:46:40+08:00</updated>
+  <updated>2012-05-19T00:36:04+08:00</updated>
   <id>http://nisra-shaolin.github.com/</id>
   <author>
     <name><![CDATA[shaolin]]></name>
@@ -158,7 +158,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 <p><em>目的：每次要看個 log 就要打好多字好麻煩，有沒有什麼更快的方法？</em></p>
 
-<p>可以使用 alias 別名，讓以後</p>
+<p>可以設定 alias 別名，設定後只要輸入短短的別名，就可以執行長長的指令</p>
 
 <pre><code>&gt; git config --global alias.hist "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
 &gt; git hist  （看結果）
