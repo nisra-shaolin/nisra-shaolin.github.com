@@ -5,11 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+  <title>少林@NISRA</title>
+  <meta name="author" content="shaolin">
 
   
-  <meta name="description" content=" Blog Archives Recent Posts ">
+  <meta name="description" content="2012/05/15 少林＠NISRA Git 在做什麼？
+Git 跟著做
+Git 參考資源
+Git 挑戰
+Git 還可以怎麼用？ Git 在做什麼？ 從單機RPG遊戲的角度想像 玩遊戲碰到很強的王之前（或者掉寶率很低），通常會存檔 （commit）
+遊戲玩到後期發現前期有一個寶物沒拿， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +29,7 @@
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="少林@NISRA" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -35,9 +40,9 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
+  <h1><a href="/">少林@NISRA</a></h1>
   
-    <h2>A blogging framework for hackers.</h2>
+    <h2>放一些課程記錄</h2>
   
 </hgroup>
 
@@ -65,6 +70,502 @@
       <div class="blog-index">
   
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/18/git-tutorial/">NISRA GIT 初學(課堂文件記錄)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-18T23:43:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>2012/05/15 少林＠NISRA</h2>
+
+<ul>
+<li><a href="#overview">Git 在做什麼？</a></li>
+<li><a href="#DIY">Git 跟著做</a></li>
+<li><a href="#ref">Git 參考資源</a></li>
+<li><a href="#challenge">Git 挑戰</a></li>
+<li><a href="#misc">Git 還可以怎麼用？</a></li>
+</ul>
+
+
+<h2 id="overview">Git 在做什麼？</h2>
+
+
+<h4>從單機RPG遊戲的角度想像</h4>
+
+<blockquote><ol>
+<li>玩遊戲碰到很強的王之前（或者掉寶率很低），通常會<strong>存檔</strong> （commit）</li>
+<li>遊戲玩到後期發現前期有一個寶物沒拿，但現在等級太高解不到，希望回到過去解寶物，主線劇情又不想要重打 （checkout、merge）</li>
+<li>遊戲有多種結局，到了叉路不知道該怎麼選 （branch）</li>
+</ol>
+</blockquote>
+
+<p>Git 是版本控管軟體，像是遊戲存檔的管理，隨時都可以回到過去每一個記錄點，從那邊開始，甚至可以跟你最新的存檔結合。</p>
+
+<hr />
+
+<h2 id="DIY">Git 跟著做</h2>
+
+
+<h4>環境建置</h4>
+
+<p>首先要在 ubuntu 環境下建置 git 環境</p>
+
+<pre><code>&gt; sudo apt-get install git-core 
+&gt; git --version  (安裝後查看 git 版本)
+git version 1.7.8.3
+</code></pre>
+
+<h4>設定 config</h4>
+
+<p>使用 git 的第一步設定你的名字，這樣在你每次存檔（commit）的時候，別人才知道這個記錄是你玩的</p>
+
+<pre><code>&gt; git config --global user.name 大中天
+&gt; git config --global user.email xxx@ooo.com
+</code></pre>
+
+<p>當設定好後就會在你的 <code>~/.gitconfig</code> 文件檔加入剛剛的設定
+如果你沒有使用 <code>--global</code> 參數的話</p>
+
+<pre><code>&gt; git config user.name 大中天
+&gt; git config user.email xxx@ooo.com
+</code></pre>
+
+<p>那這個設定就會被加在你當前工作目錄的 <code>./.git/config</code> 中，只有在這個倉庫（Repository）才會套用這個設定。（或者你可想只有在這個專案或遊戲的存檔會用你的名字）</p>
+
+<pre><code>&gt; git config --list
+</code></pre>
+
+<p>你可以使用上面的指令來看你目前的設定</p>
+
+<p>為了讓介面顯示更漂亮，可以在設定裡面設定呈現使用彩色</p>
+
+<pre><code>&gt; git config --global color.ui true
+</code></pre>
+
+<h4>初體驗</h4>
+
+<p>什麼都不要管，照著做一次</p>
+
+<pre><code>&gt; git init （這是 git 初始化）
+&gt; git status
+&gt; （新增一個叫做 hero.txt 的檔案，隨便打點東西在裡面）
+&gt; git status
+&gt; git add hero.txt
+&gt; git status 
+&gt; git commit -m "First Commit"
+&gt; git status
+</code></pre>
+
+<h4>三種狀態的介紹</h4>
+
+<ul>
+<li>過去的版本控管：記錄變化 (存檔和存檔的變化，LV5->LV6改變了多少 HP MP)</li>
+<li>git：快照 snapshot</li>
+</ul>
+
+
+<p>git機制（略）請參考推薦書籍</p>
+
+<blockquote><p>對於任何一個檔案，在 Git 內都只有三種狀態：<strong>已提交</strong>（committed），<strong>已修改</strong>（modified）和<strong>已暫存</strong>（staged）。已提交表示該檔案已經被安全地保存在本地資料庫中了；已修改表示修改了某個檔案，但還沒有提交保存；已暫存表示把已修改的檔案放在下次提交時要保存的清單中。[節錄於 Pro Git 一書，詳見 ref]</p></blockquote>
+
+<p><img src="http://rogerdudler.github.com/git-guide/img/trees.png" alt="workflow" /></p>
+
+<h4>練習狀態不斷切換</h4>
+
+<p><em>目的：新增、修改在 working dir 裡面的檔案，裡用下面指令切換他們的狀態</em></p>
+
+<pre><code>&gt; git status
+&gt; git reset
+&gt; git reset &lt;檔名&gt; （只回復單一檔案狀態）
+&gt; git commit -m XX（如果 reset 後 commit）
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+
+<p>請觀察 git status 的訊息，學著看不同的狀態有什麼樣的訊息出現。（裡面提到的 HEAD，代表你現在所在的位置）</p>
+
+<p>如果覺得每次 commit 都還要打很多指令很麻煩，可以用下面的指令，詳細用法多<code>help</code>查看囉！</p>
+
+<pre><code>&gt; git -i
+&gt; git commit -a -m "註解" （代表的是 add + commit，但只有 add 修改的，新增的檔案還是要手動 add 一次）
+</code></pre>
+
+<h4>忽略</h4>
+
+<p>有些不想要被追蹤的檔案，可以在該目錄底下新增一個 <code>.gitignore</code> 檔案，並且在這個檔案裡面加入不想被追蹤的檔案名稱，再看 <code>git status</code> 就會發現列在 <code>.gitignore</code> 裡面的檔案都不會出現了。（注意：記得要把 .gitignore 檔名加入到 .gitignore 檔案裡唷！）</p>
+
+<h4>觀察過往記錄</h4>
+
+<p><em>目的：觀察所有的提交記錄（想要知道有哪些遊戲存檔）</em></p>
+
+<pre><code>&gt; git log
+</code></pre>
+
+<p>但是 log 實在有點冗長，可以這樣做</p>
+
+<pre><code>&gt; git log --pretty=oneline （每筆記錄只顯示一行）
+&gt; git log --pretty=oneline --max-count=3  （總共只取最後三筆）
+&gt; git log --pretty=oneline --since='4 minutes ago'  （用時間篩選）
+&gt; git log --pretty=oneline --until='1 hours ago'  （用時間篩選）
+&gt; git log --pretty=oneline --author=&lt;提交作者&gt;  （用作者來篩選）
+
+&gt; git log --all --pretty=format:"%h %cd %s (%an)" --since='7 days ago'    （改變呈現格式，格式請自行搜尋）
+&gt; git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short  （加入樹狀圖形）
+</code></pre>
+
+<h4>alias 別名</h4>
+
+<p><em>目的：每次要看個 log 就要打好多字好麻煩，有沒有什麼更快的方法？</em></p>
+
+<p>可以使用 alias 別名，讓以後</p>
+
+<pre><code>&gt; git config --global alias.hist "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
+&gt; git hist  （看結果）
+</code></pre>
+
+<p>或者你也可以使用 shell 的 alias：</p>
+
+<pre><code>&gt; alias ghist='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+&gt; ghist  （看結果）
+</code></pre>
+
+<h4>在提交的版本中跳躍</h4>
+
+<p><em>目的：提交了很多次，想要跳到某個提交版本（想要玩某個存檔）</em></p>
+
+<pre><code>&gt; git hist  （還記得我們已經 alias 過了嗎？）
+* 000a2c8 2012-05-15 | 等級提升為lv2 (HEAD, master) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+&gt; git checkout e8d17a1  （後面參數為 hist 裡面查到的 hash） 
+........................
+HEAD is now at e8d17a1... 建立英雄
+&gt; cat hero.txt  （檔案變回剛初始時的樣子了）
+</code></pre>
+
+<p>先知道怎麼跳就好了，先跳回來當前的紀錄</p>
+
+<pre><code>&gt; git checkout master
+</code></pre>
+
+<p>master 是主要的支線（畫在白板上，還記得嗎）</p>
+
+<h4>Tag 功能</h4>
+
+<p><em>目的：在使用 checkout 的時候打長長一串 hash 太麻煩，而且也不好打</em></p>
+
+<pre><code>&gt; git tag lv2
+&gt; git hist
+* 000a2c8 2012-05-15 | 等級提升為lv2 (HEAD, lv2, master) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+&gt; git checkout lv2^  （^代表上一個的意思）
+HEAD is now at e37c7d1... 新增技能表
+&gt; git tag new_skill
+&gt; git hist
+* e37c7d1 2012-05-15 | 新增技能表 (HEAD, new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+&gt; git checkout lv2
+&gt; git hist
+* 000a2c8 2012-05-15 | 等級提升為lv2 (HEAD, lv2, master) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天] 
+</code></pre>
+
+<p>請注意每筆 log 後面的括弧，我們可以用括弧內的任一值當做 checkout 的參數</p>
+
+<h4>檔案變化</h4>
+
+<p><em>目的：commit 如此多，想要知道 commit 之間到底有哪些不一樣</em></p>
+
+<pre><code>（法一）
+&gt; git show
+（法二）
+&gt; git diff (尚未暫存的檔案更新了哪些部份)
+（法三）
+&gt; git log -p
+&gt; git log -p -2 (只顯示最近兩次的更新)
+</code></pre>
+
+<h4>對單一檔案回復</h4>
+
+<p><em>目的：同時幾個檔案，發現其中有一個檔案改爛了，想要回復到之前的版本</em></p>
+
+<pre><code>（修改 hero.txt）
+&gt; git checkout hero.txt
+&gt; cat hero.txt （檔案已經回復）
+或者那個檔案想要回復到特定版本
+&gt; git checkout HEAD^^ hero.txt
+&gt; cat hero.txt （檔案已經回復到剛建立 hero.txt 的樣貌）
+</code></pre>
+
+<h4>修正 commit</h4>
+
+<p><em>目的：commit 之後才發現有些小錯誤，可能只是打錯字，改完錯字後只想修正而不另外再 commit 一個新的</em></p>
+
+<pre><code>（修改 skill.txt）
+&gt; git commit -a -m "習得新技能隔山打牛(有錯字)"
+（發現錯字，並修正之）
+&gt; git commit --amend -a -m "習得新技能隔山打牛"
+&gt; git hist
+* 8ede676 2012-05-15 | 習得新技能隔山打牛 (HEAD, master) [大中天]
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+</code></pre>
+
+<h4>回復某版本</h4>
+
+<p><em>目的：想回復到之前的某個版本</em></p>
+
+<pre><code>&gt; git hist
+* 8ede676 2012-05-15 | 習得新技能隔山打牛 (HEAD, master) [大中天]
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+&gt; git revert lv2
+（此時會跳出預設編輯器，讓你編輯 commit 的訊息，可以直接離開就好了）
+&gt; git hist
+* e9c540f 2012-05-15 | Revert "等級提升為lv2" (HEAD, master) [大中天]
+* 8ede676 2012-05-15 | 習得新技能隔山打牛 [大中天]
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+</code></pre>
+
+<p>revert 跟之前介紹的 checkout 有什麼差別？還記得在前面我介紹 checkout 時用的詞是跳躍，checkout 可以跳躍到任何一個節點，跳到節點後對檔案做的任何修改都會變成一條新分支。而使用 revert 會把回復的動作當成一次的 commit，是直接在你當前的分支繼續長下去。</p>
+
+<p>如果你是想要<strong>還原</strong>到某個版本，並且<strong>刪除</strong>掉那個版本之後的版本，那你可以用 <code>git rest --hard</code></p>
+
+<pre><code>&gt; git hist
+* e9c540f 2012-05-15 | Revert "等級提升為lv2" (HEAD, master) [大中天]
+* 8ede676 2012-05-15 | 習得新技能隔山打牛 [大中天]
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+&gt; git reset --hard HEAD^
+&gt; git hist --all
+* 8ede676 2012-05-15 | 習得新技能隔山打牛 (HEAD, master) [大中天]
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+</code></pre>
+
+<p>不過使用上請小心，hard reset 真的會把<strong>記錄檔案清光光</strong>，我個人比較會用 revert，還可以做些記錄！</p>
+
+<h4>分支</h4>
+
+<p><em>目的：開發新功能又怕影響到原本的功能，可以開一個分支開發，如果穩定的話再把它合併（merge）回主要的支線（master）</em></p>
+
+<pre><code>從目前支線的頂端開一個新的支線 #遊戲遇到選對話，想要先玩玩看其一，如果順利就玩下去
+&gt; git checkout -b 拒絕魯凱
+Switched to a new branch '拒絕魯凱'
+
+或是從舊的 commit 中開一個新的支線 #回到 lv2 解 lv2 限定任務
+&gt; git checkout lv2 -b 解lv2限定任務
+Switched to a new branch '解lv2限定任務'
+&gt; git branch  （看目前有哪些分支，以及我們所在的分支）
+  master
+  拒絕魯凱
+* 解lv2限定任務
+&gt; git hist
+* 000a2c8 2012-05-15 | 等級提升為lv2 (HEAD, lv2, 解lv2限定任務) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+（已經在 lv2 了呢！可以解任務了！）
+</code></pre>
+
+<h4>合併</h4>
+
+<p><em>目的：開了一個分支開發新功能，測試穩定後想要將新功能編入主版本中</em></p>
+
+<p><img src="http://rogerdudler.github.com/git-guide/img/branches.png" alt="merge" /></p>
+
+<pre><code>（在『拒絕魯凱』這個分支裡做一些事情並且 commit）
+拒絕魯凱&gt; git commit -a -m '安安魯凱'
+拒絕魯凱&gt; git checkout master
+master&gt; git hist --all
+* c91555f 2012-05-15 | 安安魯凱 (拒絕魯凱) [大中天]
+* 8ede676 2012-05-15 | 習得新技能隔山打牛 (HEAD, master) [大中天]
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2, 解lv2限定任務) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+master&gt; git merge 拒絕魯凱
+master&gt; git hist --all
+* c91555f 2012-05-15 | 安安魯凱 (HEAD, 拒絕魯凱, master) [大中天]
+* 8ede676 2012-05-15 | 習得新技能隔山打牛 [大中天]
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2, 解lv2限定任務) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+</code></pre>
+
+<h4>衝突</h4>
+
+<p><em>在合併的過程中，如果相同檔案的相同位置都有變動，系統就不會自動合併，會先幫你在檔案標示異同</em></p>
+
+<pre><code>master&gt; git checkout 解lv2限定任務
+
+（對檔案做一些變動）
+解lv2限定任務&gt; git commit -a -m '解到老練的棒棒'
+解lv2限定任務&gt; git hist --all
+* 3eb94be 2012-05-15 | 解到老練的棒棒 (HEAD, 解lv2限定任務) [大中天]
+| * c91555f 2012-05-15 | 安安魯凱 (拒絕魯凱, master) [大中天]
+| * 8ede676 2012-05-15 | 習得新技能隔山打牛 [大中天]
+|/  
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+
+解lv2限定任務&gt; git checkout master
+master&gt; git merge 解lv2限定任務
+CONFLICT (content): Merge conflict in hero.txt
+Automatic merge failed; fix conflicts and then commit the result.
+（解到任務了，可是HP和MP這些值可能不一樣了，手動修改這些衝突檔案）
+
+master&gt; vi hero.txt （修改）
+master&gt; git commit -a  （修改後直接 commit）
+（此時會跳出預設編輯器讓你修改 commit 資訊，可以忽略直接離開）
+[master 560b015] Merge branch '解lv2限定任務'
+
+master&gt; git hist
+*   560b015 2012-05-15 | Merge branch '解lv2限定任務' (HEAD, master) [大中天]
+|\  
+| * 274d835 2012-05-15 | 解到老練的棒棒 (解lv2限定任務) [大中天]
+* | c91555f 2012-05-15 | 安安魯凱 (拒絕魯凱) [大中天]
+* | 8ede676 2012-05-15 | 習得新技能隔山打牛 [大中天]
+|/  
+* 000a2c8 2012-05-15 | 等級提升為lv2 (lv2) [大中天]
+* e37c7d1 2012-05-15 | 新增技能表 (new_skill) [大中天]
+* e8d17a1 2012-05-15 | 建立英雄 [大中天]
+</code></pre>
+
+<p>小技巧：git merge 後發現有衝突，可以使用 <code>git mergetool</code> 叫出一些圖形化介面的工具方便修改和比對。</p>
+
+<hr />
+
+<h4>多人維護專案 (git 的魅力)</h4>
+
+<p>上面介紹的功能，其實較早以前的版本控制系統都有，但是，為什麼 Git 會越來越熱門？原因在於多人開發時，Git 相對比較容易些，Git 先天的架構，讓他可以是<strong>分散式</strong>的、可以<strong>方便管理 branch</strong>，過程記錄很完善，重點是它還很<strong>快</strong>。這對團隊開發來說，是很強大的優勢，不過這可能需要多使用才能比較與體會了。</p>
+
+<p>要如何多人共同開發 git 專案，其實可以架一個 git server 存放專案的 repository，開發成員透過 SSH 或者 HTTP 傳輸取得 repository (pull)，取得後在本機端繼續開發，跟我們前面所做的動作一樣，修改好後再推(push)回去。基本的概念就是這樣。</p>
+
+<p>雖然架一個 git server 非常簡易，但其實也可以考慮使用一些公開的服務。<a href="https://github.com/">Github</a>就是一個很棒的 Git 平台，你可以免費在這個平台儲存你的專案並與他人分享。</p>
+
+<h4>(github) 抓人家的專案</h4>
+
+<p><em>讓我們實際的看看 github 上人家的專案，並且使用 git 抓下來看看吧！</em></p>
+
+<p>其實 git 本身也是在 github 上面發展的唷！你可以到 <a href="https://github.com/git/git">github.com/git/git</a> 看到 git 的原始碼。點選網頁上的『Git Read-Only』按鈕，就可以看到一個連結：git://github.com/git/git.git。你可以使用 <code>git clone</code> 語法抓下來。</p>
+
+<pre><code>&gt; git clone git://github.com/git/git.git
+（或要自訂資料夾名稱的話）
+&gt; git clone git://github.com/git/git.git 自訂資料夾名稱
+</code></pre>
+
+<h4>(github) 把自己的專案放上去</h4>
+
+<p><em>試試看實際把自己的專案放上去</em></p>
+
+<ol>
+<li>註冊 <a href="https://github.com/">Github</a> 帳號</li>
+<li>照著官方的 <a href="http://help.github.com/mac-set-up-git/">Set Up Git</a> 來設定 SSH key （請注意作業系統，官方教學有分成 mac, win, linux 三種）</li>
+<li>照著官方的 <a href="http://help.github.com/create-a-repo/">Create A Repo</a> 來新建一個 repository。其實在新增一個新的 repo 後，就會在該 repo 頁面看到 step by step 的教學，跟著做就好了。試著把剛剛練習的東西放上去（反正只是文字檔，別害羞XD）</li>
+</ol>
+
+
+<h4>(github) fork and pull request</h4>
+
+<p><em>實際抓一個人家的專案，修改，再上傳</em></p>
+
+<p>我們常常可以看到有些網站上面可能有個很大的 Fork me on Github 圖片。Fork 這個動作簡單來說，會把這個專案複製一份到你的帳號，你可以直接在你帳號下對這個專案維護修改。當你覺得你改得不錯，想要貢獻回去讓你改的功能變成主版本的功能，你可以對原作者發送一個請求(pull request)，請作者將你的程式碼 pull 回去，如果作者也覺得這功能不錯，原作者可以選擇 merge。</p>
+
+<p>官方有 <a href="http://help.github.com/fork-a-repo/">Fork A Repo</a> 教學，不過其實點一下 fork 按鈕就好了。課堂上大家可以互相 fork 彼此的專案來玩玩看，修改人家的文件，並且發發看 pull request。官方也有一個 <a href="http://help.github.com/send-pull-requests/">Send pull requests</a> 教學可以參考。</p>
+
+<p>你現在看的這份文件也是在 github 上面唷！你可以在<a href="https://github.com/nisra-shaolin/nisra-shaolin.github.com">這邊</a> fork 回去，但我應該是不會接受 pull request :)</p>
+
+<hr />
+
+<h4>小結</h4>
+
+<p>第一次學習 git 的人可能會對這次的教學感到暈頭轉向，不過還是希望學弟妹能硬撐著，如果你要待在寫程式領域發展，<strong>git 是一個你總有一天要碰的東西</strong>，而且它真的不難，常用的指令大概才五個而已，只要你開始習慣一個程式寫了一個版本就 git commit -a -m 一下，之後碰到問題，相信你一下就可以從網路上找到解答XD</p>
+
+<p>有很多人寫很漂亮的 git 圖形化工具，我也推薦大家去使用，但是基本的 CLI 指令還是要知道，因為即使使用圖形化介面還是多少還是會用到 CLI 指令。</p>
+
+<p>下面我提供了一些好書，可以補足這次沒有講到的觀念。</p>
+
+<h2 id="ref">Git 參考資源</h2>
+
+
+<ul>
+<li>git help<br/>
+最常用到的指令，多看看有什麼奇妙的參數可以使用</li>
+<li><a href="http://rogerdudler.github.com/git-guide/">Git 簡易指南</a><br/>
+又短又簡易的指南，這裡面的指令都知道在幹嘛幾乎就可以上戰場了</li>
+<li><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_tw/book.pdf">Git 魔法</a><br/>
+原文是在<a href="https://github.com/blynn/gitmagic">這邊</a>，感謝有人翻譯並且做成 PDF</li>
+<li><a href="http://progit.org">Git Pro</a><br/>
+這本書的專案也是放在 <a href="https://github.com/progit/progit">github</a> 上唷！<br/>
+有翻譯成滿多語系的，可以用今天學的方法抓下來，自己做成電子書看看 :)<br/>
+這是一本很經典的書，觀念也講得很多，推薦！</li>
+</ul>
+
+
+<h2 id="challenge">Git 挑戰</h2>
+
+
+<p>如果想要測試一下自己 Git 學得精不精，有一個用 Ruby 寫的文字介面遊戲叫做 <strong>Githug</strong>，有點像我們擅長玩的 wargame，大家可以挑戰看看。</p>
+
+<p>因為上週沒有講到 Ruby 這個程式語言，來簡易介紹一下如何使用它。<br/>
+ruby 有很多版本，在測試時我們常用一個東西叫做 rvm(Ruby Version Manager)，它可以隨時切換不同的 ruby 版本，而且它是將 ruby 裝在自己的家目錄底下，並不會影響系統的 ruby 版本，算是很方便的工具。</p>
+
+<p>請按照 <a href="https://rvm.io/">RVM 官方網站</a>的<a href="https://rvm.io/rvm/install/">安裝步驟</a>，來裝，才四個步驟而已。如果你電腦裡面沒有 curl 就需要安裝一下 <code>sudo apt-get install curl</code>。</p>
+
+<p>安裝好後敲敲看 <code>which ruby</code>，如果顯示的目錄是在你的家目錄，那你應該就是成功了！</p>
+
+<p>接下來，剛好有人寫了<a href="http://blog.lisp.tw/blog/2012/03/16/githug/">介紹文</a>，照著它的步驟做應該就可以開始玩了，祝你們順利了！（本來想跟大家一起破關的，結果時間來不及，哭哭～）</p>
+
+<h2 id="misc">Git 還可以怎麼用？</h2>
+
+
+<ul>
+<li>利用 Dropbox 存 repo</li>
+<li>試用軟體</li>
+<li>寫日記XD</li>
+<li>&#8230;..</li>
+</ul>
+
+
+<hr />
+
+<p>結束！YA！</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -76,6 +577,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/05/18/git-tutorial/">NISRA GIT 初學(課堂文件記錄)</a>
+      </li>
     
   </ul>
 </section>
@@ -91,7 +596,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Your Name -
+  Copyright &copy; 2012 - shaolin -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -99,6 +604,15 @@
   
 
 
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
 
